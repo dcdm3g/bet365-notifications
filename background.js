@@ -1,5 +1,3 @@
-const audio = new Audio()
-
 function createNotification({ title, message }) {
   chrome.notifications.create({
     type: 'basic',
@@ -29,8 +27,8 @@ function handleMessage({ message, payload }) {
     message: notification.message, 
   })
 
-  audio.src = 'https://cdn.pixabay.com/audio/2023/06/01/audio_77fe776ce5.mp3'
-  audio.play()
+  const sound = new Audio('assets/notification-sound.mp3')
+  sound.play()
 }
 
 chrome.runtime.onMessage.addListener(({ message, payload }) => {
