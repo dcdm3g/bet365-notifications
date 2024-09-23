@@ -1,0 +1,23 @@
+* {
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-background: 18, 110, 81;
+  --color-foreground: 255, 255, 255;
+}
+
+body {
+  background-color: rgb(var(--color-background));
+  font-family: 'Inter', sans-serif;
+}
+
+.status {
+  color: rgba(var(--color-foreground));
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+}
