@@ -15,7 +15,7 @@ function handleMessage({ message, payload }) {
     }),
     'notification-count-increased': (payload) => ({
       title: `${payload.count} ${payload.count === 1 ? 'notificação' : 'notificações'} na Bet365`,
-      message: `Vocẽ tem ${payload.count} notificações na Bet365.`,
+      message: `Vocẽ tem ${payload.count} ${payload.count === 1 ? 'notificação' : 'notificações'} na Bet365.`,
     }),
   }
 
