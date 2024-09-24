@@ -1,14 +1,15 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Bet365 Notifications",
   "version": "1.0",
   "description": "Notifica apostadores da Bet365 sobre atualizações em suas apostas.",
   "permissions": [
     "tabs",
     "notifications",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "assets/icon-16x16.png",
@@ -17,8 +18,7 @@
     }
   },
   "background": {
-    "scripts": ["background.js"],
-    "persistent": true
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
