@@ -5,8 +5,7 @@
   "description": "Notifica apostadores da Bet365 sobre atualizações em suas apostas.",
   "permissions": [
     "tabs",
-    "notifications",
-    "activeTab"
+    "notifications"
   ],
   "browser_action": {
     "default_popup": "popup.html",
