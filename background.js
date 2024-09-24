@@ -26,6 +26,9 @@ function handleMessage({ message, payload }) {
     title: notification.title, 
     message: notification.message, 
   })
+
+  const sound = new Audio('assets/notification-sound.mp3')
+  sound.play()
 }
 
 chrome.runtime.onMessage.addListener(({ message, payload }) => {
