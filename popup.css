@@ -14,7 +14,7 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-.status {
+p {
   color: rgba(var(--color-foreground));
   font-size: 1rem;
   line-height: 1.5rem;

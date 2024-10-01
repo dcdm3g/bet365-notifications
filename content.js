@@ -1,10 +1,9 @@
-function emitMessage({ action, payload }) {
-  chrome.runtime.sendMessage({ action, payload })
-}
-
 function getIsLoggedIn() {
-  const narrowLoginButton = document.querySelector('.hm-MainHeaderRHSLoggedOutNarrow_Login')
-  const wideLoginButton = document.querySelector('.hm-MainHeaderRHSLoggedOutWide_Login ')
+  const narrowLoginButton = 
+    document.querySelector('.hm-MainHeaderRHSLoggedOutNarrow_Login')
+
+  const wideLoginButton = 
+    document.querySelector('.hm-MainHeaderRHSLoggedOutWide_Login ')
 
   return !narrowLoginButton && !wideLoginButton
 }
@@ -18,36 +17,18 @@ function getNotifications() {
     : 0
 }
 
-let state = {
-  isLoggedIn: null,
-  notifications: null,
-}
-
-function refreshNotifications() {
-  const isLoggedIn = getIsAuthenticated()
-
-  if (!isLoggedIn) {
-    if (isLoggedIn !== state.isLoggedIn) {
-      state.isLoggedIn = isLoggedIn
-
-      emitMessage({ 
-        action: 'user-has-logged-out',
-      })
-    }
-    
-    return
-  }
-
+function handleGetStateMessage() {
+  const isLoggedIn = getIsLoggedIn()
   const notifications = getNotifications()
 
-  if (notifications && notifications > state.notifications) {
-    emitMessage({
-      action: 'notifications-increased',
-      payload: { notifications },
-    })
-  }
-
-  state.notifications = notifications
+  chrome.runtime.sendMessage({ 
+    message: 'set-state', 
+    payload: { isLoggedIn, notifications }
+  })
 }
 
-window.onload = () => setInterval(refreshNotifications, 1000)
+chrome.runtime.onMessage.addListener(({ message }) => {
+  if (message === 'get-state') {
+    handleGetStateMessage()
+  }
+})
