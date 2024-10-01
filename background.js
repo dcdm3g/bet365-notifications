@@ -7,19 +7,19 @@ function createNotification({ title, message }) {
   })
 }
 
-function handleMessage({ message, payload }) {
-  const notificationFactoriesByMessage = {
+function handleMessage({ action, payload }) {
+  const notificationFactories = {
     'user-not-authenticated': () => ({
       title: 'Faça login na Bet365',
       message: 'Parece que você não está autenticado na Bet365, faça login para receber notificações.',
     }),
-    'notification-count-increased': (payload) => ({
-      title: `${payload.count} ${payload.count === 1 ? 'notificação' : 'notificações'} na Bet365`,
-      message: `Vocẽ tem ${payload.count} ${payload.count === 1 ? 'notificação' : 'notificações'} na Bet365.`,
+    'notification-count-increased': ({ notifications }) => ({
+      title: `${notifications} ${notifications === 1 ? 'notificação' : 'notificações'} na Bet365`,
+      message: `Vocẽ tem ${notifications} ${notifications === 1 ? 'notificação' : 'notificações'} na Bet365.`,
     }),
   }
 
-  const notificationFactory = notificationFactoriesByMessage[message]
+  const notificationFactory = notificationFactories[action]
   const notification = notificationFactory(payload)
 
   createNotification({ 
@@ -31,6 +31,7 @@ function handleMessage({ message, payload }) {
   sound.play()
 }
 
-chrome.runtime.onMessage.addListener(({ message, payload }) => {
-  handleMessage({ message, payload })
+chrome.runtime.onMessage.addListener(({ action, payload }) => {
+  console.log(JSON.stringify(payload, null, 2))
+  handleMessage({ action, payload })
 })

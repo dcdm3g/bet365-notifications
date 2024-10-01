@@ -1,5 +1,5 @@
-function emitMessage({ message, payload }) {
-  chrome.runtime.sendMessage({ message, payload })
+function emitMessage({ action, payload }) {
+  chrome.runtime.sendMessage({ action, payload })
 }
 
 function getIsAuthenticated() {
@@ -9,18 +9,18 @@ function getIsAuthenticated() {
   return !narrowLoginButton && !wideLoginButton
 }
 
-function getNotificationCount() {
-  const notificationCountElement = 
+function getNotifications() {
+  const notificationsElement = 
     document.querySelector('.hm-HeaderMenuItemMyBets_MyBetsCount')
 
-  return notificationCountElement
-    ? Number(notificationCountElement.innerText)
+  return notificationsElement
+    ? Number(notificationsElement.innerText)
     : 0
 }
 
 let state = {
   isAuthenticated: null,
-  notificationCount: null,
+  notifications: null,
 }
 
 function refreshNotifications() {
@@ -31,21 +31,21 @@ function refreshNotifications() {
       state.isAuthenticated = isAuthenticated
 
       emitMessage({ 
-        message: 'user-not-authenticated',
+        action: 'user-not-authenticated',
       })
     }
     
     return
   }
 
-  const notificationCount = getNotificationCount()
+  const notifications = getNotifications()
 
-  if (notificationCount && notificationCount > state.notificationCount) {
-    state.notificationCount = notificationCount
+  if (notifications && notifications > state.notifications) {
+    state.notifications = notifications
 
     emitMessage({
-      message: 'notification-count-increased',
-      payload: { count: notificationCount },
+      action: 'notification-count-increased',
+      payload: { notifications },
     })
   }
 }
