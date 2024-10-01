@@ -9,7 +9,7 @@ function createNotification({ title, message }) {
 
 function handleMessage({ action, payload }) {
   const notificationFactories = {
-    'user-not-authenticated': () => ({
+    'user-has-logged-out': () => ({
       title: 'Faça login na Bet365',
       message: 'Parece que você não está autenticado na Bet365, faça login para receber notificações.',
     }),

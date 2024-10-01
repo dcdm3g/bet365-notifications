@@ -2,7 +2,7 @@ function emitMessage({ action, payload }) {
   chrome.runtime.sendMessage({ action, payload })
 }
 
-function getIsAuthenticated() {
+function getIsLoggedIn() {
   const narrowLoginButton = document.querySelector('.hm-MainHeaderRHSLoggedOutNarrow_Login')
   const wideLoginButton = document.querySelector('.hm-MainHeaderRHSLoggedOutWide_Login ')
 
@@ -19,19 +19,19 @@ function getNotifications() {
 }
 
 let state = {
-  isAuthenticated: null,
+  isLoggedIn: null,
   notifications: null,
 }
 
 function refreshNotifications() {
-  const isAuthenticated = getIsAuthenticated()
+  const isLoggedIn = getIsAuthenticated()
 
-  if (!isAuthenticated) {
-    if (isAuthenticated !== state.isAuthenticated) {
-      state.isAuthenticated = isAuthenticated
+  if (!isLoggedIn) {
+    if (isLoggedIn !== state.isLoggedIn) {
+      state.isLoggedIn = isLoggedIn
 
       emitMessage({ 
-        action: 'user-not-authenticated',
+        action: 'user-has-logged-out',
       })
     }
     
