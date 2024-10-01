@@ -13,7 +13,7 @@ function handleMessage({ action, payload }) {
       title: 'Faça login na Bet365',
       message: 'Parece que você não está autenticado na Bet365, faça login para receber notificações.',
     }),
-    'notification-count-increased': ({ notifications }) => ({
+    'notifications-increased': ({ notifications }) => ({
       title: `${notifications} ${notifications === 1 ? 'notificação' : 'notificações'} na Bet365`,
       message: `Vocẽ tem ${notifications} ${notifications === 1 ? 'notificação' : 'notificações'} na Bet365.`,
     }),

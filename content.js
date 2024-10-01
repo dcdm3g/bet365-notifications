@@ -42,7 +42,7 @@ function refreshNotifications() {
 
   if (notifications && notifications > state.notifications) {
     emitMessage({
-      action: 'notification-count-increased',
+      action: 'notifications-increased',
       payload: { notifications },
     })
   }
