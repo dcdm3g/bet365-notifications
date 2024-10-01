@@ -41,13 +41,13 @@ function refreshNotifications() {
   const notifications = getNotifications()
 
   if (notifications && notifications > state.notifications) {
-    state.notifications = notifications
-
     emitMessage({
       action: 'notification-count-increased',
       payload: { notifications },
     })
   }
+
+  state.notifications = notifications
 }
 
 window.onload = () => setInterval(refreshNotifications, 1000)
