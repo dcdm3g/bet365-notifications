@@ -13,7 +13,6 @@ function emitNotification({ title, message }) {
 let state = {
   isLoggedIn: null,
   notifications: null,
-  tabId: null,
 }
 
 function emitGetStateMessage() {
@@ -49,7 +48,6 @@ function handleSetStateMessage({ isLoggedIn, notifications }) {
       message: 'Vocẽ tem ' + ns(notifications) + ' na Bet365.',
     })
   }
-
 
   state.notifications = notifications
 }
